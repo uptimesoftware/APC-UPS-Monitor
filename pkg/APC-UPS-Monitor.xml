@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uptime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4.0" target_grouping="other">
+    <class>APC UPS Monitor</class>
+	<exec>com.uptimesoftware.uptime.erdc.MonitorCustomScriptRunner</exec>
+    <erdc_version>1.0</erdc_version>
+    <category>Network Device Monitors</category>
+    <category_related/>
+    <grid_info>
+        <supported_versions>7.2,7.3,7.4,7.5,7.6,7.7,7.8</supported_versions>
+        <supported_platforms>windows, linux</supported_platforms>
+        <upgrade_in_place>true</upgrade_in_place>
+        <requires_agent_scripts>false</requires_agent_scripts>
+    </grid_info>
+    <elements>
+		<element name="process_windows" parameter_type="input" data_type="string" gui_basic="1" range_type="0" hidden="true">
+			<control_options> size:40 </control_options>
+			<default_value>plugins/scripts/APC-UPS-Monitor/APC-UPS-Monitor.bat</default_value>
+			<short_description>Script Name</short_description>
+			<long_description>Name of the script/binary/process to be executed by Uptime </long_description>
+			<validation_rule><alphanumeric/></validation_rule>
+			<error_message><alphanumeric>required field</alphanumeric></error_message>
+			<gui_type>
+				<string/>
+			</gui_type>
+		</element>
+        <element name="process_linux" parameter_type="input" data_type="string" gui_basic="1" range_type="0" hidden="true">
+            <control_options> size:40 </control_options>
+            <default_value>plugins/scripts/APC-UPS-Monitor/APC-UPS-Monitor.sh</default_value>
+            <short_description>Script Name</short_description>
+            <long_description>Name of the script/binary/process to be executed by Uptime </long_description>
+            <validation_rule><alphanumeric/></validation_rule>
+            <error_message><alphanumeric>required field</alphanumeric></error_message>
+            <gui_type>
+                <string/>
+            </gui_type>
+        </element>
+		<element name="snmpversion" parameter_type="input" data_type="string" gui_basic="1" range_type="0" units="">
+            <control_options>size:8</control_options>
+            <default_value>v1</default_value>
+            <short_description>SNMP Version</short_description>
+            <long_description>SNMP Version</long_description>
+            <validation_rule/>
+            <error_message/>
+            <gui_type>
+                <single_select type="dropdown">
+                    <value>v1</value>
+                    <value>v2</value>
+                    <value>v3</value>
+                </single_select>
+            </gui_type>
+        </element>
+		<element name="snmp-port" parameter_type="input" data_type="string" gui_basic="1" range_type="0" units="">
+            <control_options>size:8</control_options>
+            <default_value>161</default_value>
+            <short_description>SNMP Port</short_description>
+            <long_description>SNMP Port</long_description>
+            <validation_rule/>
+            <error_message/>
+            <gui_type>
+                <string/>
+            </gui_type>
+        </element>
+	    <element name="read-community" parameter_type="input" data_type="string" gui_basic="1" range_type="0" units="">
+            <control_options>size:8</control_options>
+            <default_value>public</default_value>
+            <short_description>Community String(v1/v2)</short_description>
+            <long_description>Community String(v1/v2)</long_description>
+            <validation_rule/>
+            <error_message/>
+            <gui_type>
+                <password/>
+            </gui_type>
+        </element>        
+        <element name="agent-username" parameter_type="input" data_type="string" gui_basic="1"
+				range_type="0" units="">
+            <control_options>size:8</control_options>
+            <default_value/>
+            <short_description>Agent Username (v3)</short_description>
+            <long_description>Agent Username (v3)</long_description>
+            <validation_rule/>
+            <error_message/>
+            <gui_type>
+                <string/>
+            </gui_type>
+        </element>
+        <element name="auth-type" parameter_type="input" data_type="string" gui_basic="1"
+				range_type="0" units="">
+            <control_options>size:8</control_options>
+            <default_value/>
+            <short_description>Authentication Type (v3)</short_description>
+            <long_description>Authentication Type (v3)</long_description>
+            <validation_rule/>
+            <error_message/>
+            <gui_type>
+                <single_select type="dropdown">
+                    <value>MD5</value>
+                    <value>SHA</value>
+                </single_select>
+            </gui_type>
+        </element>
+        <element name="auth-pass" parameter_type="input" data_type="string" gui_basic="1" range_type="0" units="">
+            <control_options>size:8</control_options>
+            <default_value/>
+            <short_description>Authentication Passphrase (v3)</short_description>
+            <long_description>Authentication Passphrase(v3)</long_description>
+            <validation_rule/>
+            <error_message/>
+            <gui_type>
+                <password/>
+            </gui_type>
+        </element>
+        <element name="privacy-type" parameter_type="input" data_type="string" gui_basic="1" range_type="0" units="">
+            <control_options>size:8</control_options>
+            <default_value/>
+            <short_description>Privacy Type (v3)</short_description>
+            <long_description>Privacy Type (v3)</long_description>
+            <validation_rule/>
+            <error_message/>
+            <gui_type>
+                <single_select type="dropdown">
+                    <value>DES</value>
+                    <value>AES</value>
+                </single_select>
+            </gui_type>
+        </element>
+		<element name="privacy-pass" parameter_type="input" data_type="string" gui_basic="1" range_type="0" units="">
+            <control_options>size:8</control_options>
+            <default_value/>
+            <short_description>Privacy Passphrase (v3)</short_description>
+            <long_description>Privacy Passphrase(v3)</long_description>
+            <validation_rule/>
+            <error_message/>
+            <gui_type>
+                <password/>
+            </gui_type>
+        </element>
+        <element name="state_int" parameter_type="output" data_type="integer" gui_basic="1" range_type="0" units="">
+            <control_options>size:1</control_options>
+            <default_value/>
+            <short_description>Raw state (int)</short_description>
+            <long_description>RAW data from UPS power state OID</long_description>
+            <validation_rule/>
+            <error_message/>
+            <gui_type>
+				<integer/>
+			</gui_type>
+        </element>
+		<element name="state" parameter_type="output" data_type="string" gui_basic="1" range_type="0" units="">
+            <control_options>size:64</control_options>
+            <default_value/>
+            <short_description>State</short_description>
+            <long_description>Human readable UPS power state</long_description>
+            <validation_rule/>
+            <error_message/>
+            <gui_type>
+				<string/>
+			</gui_type>
+        </element>
+        <element name="charge" parameter_type="output" data_type="integer" gui_basic="1" range_type="0" units="%">
+            <control_options>size:8</control_options>
+            <default_value/>
+            <short_description>Charge</short_description>
+            <long_description>Charge level of batteries</long_description>
+            <validation_rule/>
+            <error_message/>
+            <gui_type>
+				<integer/>
+			</gui_type>
+        </element>
+        <element name="timer" parameter_type="output" data_type="integer" gui_basic="0" range_type="0" units="ms">
+            <control_options>size:8</control_options>
+            <default_value/>
+            <short_description>Response time</short_description>
+            <long_description>Response time in ms</long_description>
+            <validation_rule/>
+            <error_message/>
+            <gui_type>
+                <integer/>
+            </gui_type>
+        </element>
+    </elements>
+    <help>Monitors the operational status and battery charge level on your APC UPS.</help>
+</uptime>
