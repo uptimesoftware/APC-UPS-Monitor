@@ -31,44 +31,44 @@ if ($stateQuery) {
 	$charge = str_replace(array('Gauge32: ', '"'),"",$chargeQuery);
 	if ($state == 1) {
 		$output = "State unknown"; 
-		echo "state_int: ".$state."\n";
-		echo "state: ".$output."\n";
-		echo "charge: ".$charge;
+		echo "state_int ".$state."\n";
+		echo "state ".$output."\n";
+		echo "charge ".$charge;
 		exit(1); 
 	} 
 	if ($state == 2) {
 		$output = "Power connected";
-		echo "state_int: ".$state."\n";
-		echo "state: ".$output."\n";
-		echo "charge: ".$charge;
+		echo "state_int ".$state."\n";
+		echo "state ".$output."\n";
+		echo "charge ".$charge;
 		exit(0);
 	} 
 	if ($state == 3) {
 		$output = "Power lost. Running on batteries. $charge% left."; 
-		echo "state_int: ".$state."\n";
-		echo "state: ".$output."\n";
-		echo "charge: ".$charge;
+		echo "state_int ".$state."\n";
+		echo "state ".$output."\n";
+		echo "charge ".$charge;
 		exit(1); 
 	} 
 	if ($state == 7) {
 		$output = "UPS turned off";
-		echo "state_int: ".$state."\n";
-		echo "state: ".$output."\n";
-		echo "charge: ".$charge;
+		echo "state_int ".$state."\n";
+		echo "state ".$output."\n";
+		echo "charge ".$charge;
 		exit(1);
 	}
 	if ($state == 8) {
 		$output = "UPS is rebooting";
-		echo "state_int: ".$state."\n";
-		echo "state:  ".$output."\n";
-		echo "charge:  ".$charge;
+		echo "state_int ".$state."\n";
+		echo "state ".$output."\n";
+		echo "charge ".$charge;
 		exit(1);
 	}
 	if ($state == 11) {
 		$output = "UPS is sleeping until power returns";
-		echo "state_int: ".$state."\n";
-		echo "state: ".$output."\n";
-		echo "charge: ".$charge;
+		echo "state_int ".$state."\n";
+		echo "state ".$output."\n";
+		echo "charge ".$charge;
 		exit(1);
 	}
 } else {
