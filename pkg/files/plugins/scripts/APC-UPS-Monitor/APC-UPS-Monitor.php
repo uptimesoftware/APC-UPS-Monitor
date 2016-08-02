@@ -46,7 +46,7 @@ if ($stateQuery) {
 	if ($runtimeQuery) {
 		//$runtime = str_replace(array('TimeTicks: ', '"'),"",$loadQuery);
 		preg_match('#\((.*?)\)#', $runtimeQuery, $match);
-		$runtime = $match[1]/100;
+		$runtime = $match[1]/6000;
 	}
 
 // outputs
