@@ -57,7 +57,7 @@
             </gui_type>
         </element>
 		<element name="state_int" parameter_type="output" data_type="integer" gui_basic="1" range_type="0" units="">
-            <control_options>size:1</control_options>
+            <control_options>size:3</control_options>
             <default_value/>
             <short_description>Raw state (int)</short_description>
             <long_description>RAW data from UPS power state OID</long_description>
@@ -75,7 +75,7 @@
             <gui_type><string/></gui_type>
         </element>
         <element name="charge" parameter_type="output" data_type="integer" gui_basic="1" range_type="0" units="%">
-            <control_options>size:4 </control_options>
+            <control_options>size:3 </control_options>
             <default_value/>
             <short_description>Charge</short_description>
             <long_description>Charge level of batteries</long_description>
@@ -83,6 +83,26 @@
             <error_message/>
             <gui_type><integer/></gui_type>
         </element>
+        <element name="load" parameter_type="output" data_type="integer" gui_basic="1" range_type="0" units="%">
+            <control_options>size:3 </control_options>
+            <default_value/>
+            <short_description>Load %</short_description>
+            <long_description>Percentage load on the device</long_description>
+            <validation_rule/>
+            <error_message/>
+            <gui_type><integer/></gui_type>
+        </element>
+        <element name="runtime" parameter_type="output" data_type="integer" gui_basic="1" range_type="0" units="minutes">
+            <control_options>size:8 </control_options>
+            <default_value/>
+            <short_description>Runtime</short_description>
+            <long_description>Remaining runtime if device goes on battery</long_description>
+            <validation_rule/>
+            <error_message/>
+            <gui_type><integer/></gui_type>
+        </element>		
+		
+		
         <element name="timer" parameter_type="output" data_type="ranged" gui_basic="1" range_type="0" units="ms">
             <control_options>size:8 </control_options>
             <default_value/>

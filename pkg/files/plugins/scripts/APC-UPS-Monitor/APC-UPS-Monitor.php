@@ -26,49 +26,83 @@ if ($sysDescrQuery === false) {
 $stateQuery = snmpget("$SNMP_Connection_String", "$SNMP_Community", ".1.3.6.1.4.1.318.1.1.1.4.1.1.0", 1000000); 
 $state = str_replace(array('INTEGER: ', '"'),"", $stateQuery);
 
+// if we are connected, pull and parse the details from the unit
 if ($stateQuery) {
+	
+	$charge = 0;
 	$chargeQuery = @snmpget("$SNMP_Connection_String", "$SNMP_Community", ".1.3.6.1.4.1.318.1.1.1.2.2.1.0", 1000000); 
-	$charge = str_replace(array('Gauge32: ', '"'),"",$chargeQuery);
+	if ($chargeQuery) {
+		$charge = str_replace(array('Gauge32: ', '"'),"",$chargeQuery);
+	}
+	
+	$load = 0;
+	$loadQuery = @snmpget("$SNMP_Connection_String", "$SNMP_Community", ".1.3.6.1.4.1.318.1.1.1.4.2.3.0", 1000000); 
+	if ($loadQuery) {
+		$load = str_replace(array('Gauge32: ', '"'),"",$loadQuery);
+	}
+	
+	$runtime = 0;
+	$runtimeQuery = @snmpget("$SNMP_Connection_String", "$SNMP_Community", ".1.3.6.1.4.1.318.1.1.1.2.2.3.0", 1000000); 
+	if ($runtimeQuery) {
+		//$runtime = str_replace(array('TimeTicks: ', '"'),"",$loadQuery);
+		preg_match('#\((.*?)\)#', $runtimeQuery, $match);
+		$runtime = $match[1]/100;
+	}
+
+// outputs
+	
 	if ($state == 1) {
 		$output = "State unknown"; 
 		echo "state_int ".$state."\n";
 		echo "state ".$output."\n";
-		echo "charge ".$charge;
+		echo "charge ".$charge."\n";
+		echo "load ".$load."\n";
+		echo "runtime ".$runtime."\n";
 		exit(1); 
 	} 
 	if ($state == 2) {
 		$output = "Power connected";
 		echo "state_int ".$state."\n";
 		echo "state ".$output."\n";
-		echo "charge ".$charge;
+		echo "charge ".$charge."\n";
+		echo "load ".$load."\n";
+		echo "runtime ".$runtime."\n";
 		exit(0);
 	} 
 	if ($state == 3) {
-		$output = "Power lost. Running on batteries. $charge% left."; 
+		$output = "Power lost! Running on batteries. MINUTES REMAINING: $runtime. Load at $load%, $charge% batterry capacity left."; 
 		echo "state_int ".$state."\n";
 		echo "state ".$output."\n";
-		echo "charge ".$charge;
+		echo "charge ".$charge."\n";
+		echo "load ".$load."\n";
+		echo "runtime ".$runtime."\n";		
 		exit(1); 
 	} 
 	if ($state == 7) {
 		$output = "UPS turned off";
 		echo "state_int ".$state."\n";
 		echo "state ".$output."\n";
-		echo "charge ".$charge;
+		echo "charge ".$charge."\n";
+		echo "load ".$load."\n";
+		echo "runtime ".$runtime."\n";		
 		exit(1);
 	}
 	if ($state == 8) {
 		$output = "UPS is rebooting";
 		echo "state_int ".$state."\n";
 		echo "state ".$output."\n";
-		echo "charge ".$charge;
+		echo "charge ".$charge."\n";
+		echo "load ".$load."\n";
+		echo "runtime ".$runtime."\n";		
 		exit(1);
 	}
 	if ($state == 11) {
 		$output = "UPS is sleeping until power returns";
 		echo "state_int ".$state."\n";
 		echo "state ".$output."\n";
-		echo "charge ".$charge;
+		echo "charge ".$charge."\n";
+		echo "load ".$load."\n";
+		echo "runtime ".$runtime."\n";		
 		exit(1);
 	}
 } else {
